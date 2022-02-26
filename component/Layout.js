@@ -3,7 +3,7 @@ import styles from '../styles/Layout.module.css';
 const Layout=( {children} )=>{
     console.log(children.type.name);
   
-    if( children.type.name === 'Home' ){
+    if( children.type.name === 'Home' || children.type.name === 'forgotpass' ){
         return(
             <>
                 {children}
