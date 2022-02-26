@@ -1,0 +1,16 @@
+.bodyContainer{
+    width: 100%;
+    display: flex;
+    height: 100vh;
+}
+.sidebarContainer{
+    width: 15%;
+    height: 100vh;
+}
+.mainContainer{
+    width: 85%;
+    height: 100vh;
+    background: url(https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg);
+    background-size: cover;
+  display: flex;
+}
