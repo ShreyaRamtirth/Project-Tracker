@@ -1,9 +1,10 @@
 import Sidebarmenu from "./Sidebarmenu";
 import styles from '../styles/Layout.module.css';
+import authenticateUser from "./authenticateUser";
+
 const Layout=( {children} )=>{
-    console.log(children.type.name);
   
-    if( children.type.name === 'Home' || children.type.name === 'forgotpass' ){
+    if( children.type.name === 'Home' || children.type.name === 'forgotpass' || children.type.name === 'resetpass' || children.type.name === 'getuser' ){
         return(
             <>
                 {children}
@@ -11,7 +12,11 @@ const Layout=( {children} )=>{
         )
     }    
     else{
+      
+        if(authenticateUser())
+        {
         return(
+
             <div className={styles.bodyContainer}>
                 <div className={styles.sidebarContainer}>
                     <Sidebarmenu />
@@ -19,7 +24,8 @@ const Layout=( {children} )=>{
                 <div className={styles.mainContainer}>
                  {children}</div>
             </div>
-        )
+        )}else
+        return (<div></div>)
     }
 }
 export default Layout;

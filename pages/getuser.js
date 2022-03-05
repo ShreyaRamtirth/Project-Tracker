@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactCodeInput from "react-verification-code-input";
+import { validEmail } from "../component/Regex";
 import styles from "../styles/Home.module.css";
 import image from "../public/Vias-Logo.png";
 import Image from "next/image";
@@ -8,44 +8,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaUserTie } from "react-icons/fa";
 import { GET_USER_URL } from "../pages/api/endpoints";
 
-function forgotpass() {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-  const [passerror, setPassError] = useState(false);
+function getuser() {
   const [usernameFields, setUsernameFields] = useState("");
-  const [codeFields, setCodeFields] = useState("");
-  const [usererror, setError] = useState(true);
-  const verifyOTP = async () => {
-    if (passerror) {
-      try {
-        const response = await axios.post(
-          GET_USER_URL,
-          {
-            username: usernameFields,
-          },
-          { headers: headers }
-        );
-        cookieCutter.set("jwt", response.data.jwt);
-        router.push("/resetpass");
-      } catch (error) {
-        toast.error("Invalid Code");
-      }
+  const [usererror, setError] = useState(false);
+
+  const Formvalidation = (e) => {
+    setUsernameFields(e.target.value);
+    if (validEmail.test(e.target.value)) {
+      setError(true);
     } else {
-      toast.error("Enter valid code");
+      setError(false);
     }
   };
-
-  const handlePinChange = (codeFields) => {
-    setCodeFields(codeFields);
-
-    if (codeFields.length != 6) {
-      setPassError(false);
-    } else {
-      setPassError(true);
-    }
-  };
-
   return (
     <div>
       <form className="w-full">
@@ -57,29 +31,32 @@ function forgotpass() {
             </div>
 
             <div className={styles.loginContainer}>
-              <div className={styles.loginText}>
-                Verify to reset your password
-              </div>
+              <div className={styles.loginText}>Enter your Username</div>
 
               <div className={styles.usernameBox}>
                 <span className={styles.LabelUsername}>
-                  <p>Enter Code Here</p>
+                  <FaUserTie />{" "}
                 </span>
-                <ReactCodeInput
-                  type="number"
-                  value={codeFields}
-                  onChange={handlePinChange}
+                <input
+                  className={usererror ? styles.TextUsername : styles.errorline}
+                  autoComplete="off"
+                  type="text"
+                  value={usernameFields}
+                  onChange={Formvalidation}
                 />
               </div>
 
-              {passerror ? "" : <p className={styles.error}>Code is Invalid</p>}
+              {usererror ? (
+                ""
+              ) : (
+                <p className={styles.error}>Username is Invalid</p>
+              )}
               <div className={styles.Loginbutton}>
                 <span>
                   <input
                     className={styles.loginBtn}
                     type="button"
-                    value="Verify"
-                    onClick={verifyOTP}
+                    value="Send OTP"
                   />
                 </span>
                 <ToastContainer
@@ -106,4 +83,4 @@ function forgotpass() {
   );
 }
 
-export default forgotpass;
+export default getuser;

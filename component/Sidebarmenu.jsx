@@ -6,7 +6,13 @@ import  Link  from "next/link";
 import styles from '../styles/Sidebarmenu.module.css';
 import image from '../public/Vias-Logo.png';
 import Image from 'next/image';
+import authenticateUser from './authenticateUser';
+
+
+
+
 function Sidebarmenu() {
+ 
   return (
         <div className={styles.sidebarComponent}>
             <div className={styles.logobox}>
