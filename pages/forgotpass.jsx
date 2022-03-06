@@ -5,7 +5,7 @@ import image from "../public/Vias-Logo.png";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaUserTie } from "react-icons/fa";
+import Link from "next/link";
 import { GET_USER_URL } from "../pages/api/endpoints";
 
 function forgotpass() {
@@ -22,7 +22,7 @@ function forgotpass() {
         const response = await axios.post(
           GET_USER_URL,
           {
-            username: usernameFields,
+            OTPcode: codeFields,
           },
           { headers: headers }
         );
@@ -96,7 +96,7 @@ function forgotpass() {
                 <ToastContainer />
               </div>
               <div className={styles.forgot}>
-                <span className={styles.forgotText}>Back to Login</span>
+                <span className={styles.forgotText}> <Link href="/"><a>Back to Login</a></Link></span>
               </div>
             </div>
           </div>

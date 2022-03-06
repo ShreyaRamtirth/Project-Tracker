@@ -7,6 +7,7 @@ import axios from "./api/hello";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { validEmail } from "../component/Regex";
 import image from "../public/Vias-Logo.png";
 import Image from "next/image";
@@ -25,7 +26,7 @@ export default function Home() {
   const router = useRouter();
 
   const loginHandler = (e) => {
-    e.preverntDefault();
+    
     submitForm ? handleSubmit() : toast.error("Please Enter all fields!");
   };
 
@@ -137,7 +138,7 @@ export default function Home() {
               <ToastContainer />
             </div>
             <div className={styles.forgot}>
-              <span className={styles.forgotText}>Forgot Password?</span>
+              <span className={styles.forgotText}> <Link href="/getuser"><a>Forgot Password?</a></Link> </span>
             </div>
           </div>
         </div>
