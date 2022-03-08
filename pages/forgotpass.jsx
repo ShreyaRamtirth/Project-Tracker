@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import ReactCodeInput from "react-verification-code-input";
 import styles from "../styles/Home.module.css";
 import image from "../public/Vias-Logo.png";
@@ -6,27 +6,29 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import { GET_USER_URL } from "../pages/api/endpoints";
+import { SEND_OTP } from "../pages/api/endpoints";
+import { variableName } from "./getuser";
+import { useRouter } from "next/router";
 
 function forgotpass() {
   const headers = {
     "Content-Type": "application/json",
   };
   const [passerror, setPassError] = useState(false);
-  const [usernameFields, setUsernameFields] = useState("");
   const [codeFields, setCodeFields] = useState("");
-  const [usererror, setError] = useState(true);
+  const router = useRouter();
   const verifyOTP = async () => {
     if (passerror) {
       try {
-        const response = await axios.post(
-          GET_USER_URL,
-          {
-            OTPcode: codeFields,
-          },
-          { headers: headers }
-        );
-        cookieCutter.set("jwt", response.data.jwt);
+        // const response = await axios.post(
+        //   SEND_OTP,
+        //   {
+        //     username: variableName,
+        //     OTPcode: codeFields
+        //   },
+        //   { headers: headers }
+        // );
+        
         router.push("/resetpass");
       } catch (error) {
         toast.error("Invalid Code");

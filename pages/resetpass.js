@@ -5,10 +5,31 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
-
+import { validPassword } from "../component/Regex";
+import ReactTooltip from 'react-tooltip';
 function resetpass() {
   const [passerror, setPassError] = useState(true);
   const [passwordFields, setPasswordFields] = useState("");
+  const [repasserror, setrePassError] = useState(true);
+
+  const Formvalidation = (e) =>{
+    setPasswordFields(e.target.value);
+  
+    if( validPassword.test(e.target.value)){
+      setPassError(true);
+    }else{
+      setPassError(false);
+    }
+  }
+
+  const ReFormvalidation = (e) =>{
+    
+    if(passwordFields === e.target.value){
+      setrePassError(true);
+    }else{
+      setrePassError(false);
+    }
+  }
 
   return (
     <div>
@@ -33,14 +54,18 @@ function resetpass() {
                     }
                     type="password"
                     placeholder="Enter password"
-                    onChange={(s) => {
-                      setPasswordFields(s.target.value), Formvalidation();
-                    }}
+                    onChange={Formvalidation}
                     autoComplete="off"
-                    required
+                   
+                    data-tip="Should contain Uppercase, <br>
+                    Lowercase, digit, special character,  <br>
+                     8 character long"
                   />
                 </div>
-
+                {passerror ? "" : <p className={styles.error}>Password is Invalid</p>}
+                <ReactTooltip place="right" type="info" effect="float" 
+                multiline={true} 
+                />
                 <div className={styles.passwordBox}>
                   <span className={styles.LabelPassword}>
                     <RiLockPasswordFill />
@@ -51,16 +76,15 @@ function resetpass() {
                     }
                     type="password"
                     placeholder="Re enter password"
-                    onChange={(s) => {
-                      setPasswordFields(s.target.value), Formvalidation();
-                    }}
+                    onChange={ReFormvalidation}
                     autoComplete="off"
                     required
                   />
+                 
                 </div>
               </div>
 
-              {/* {passerror ?  '' : <p className={styles.error}>Your Password is invalid</p> } */}
+              {repasserror ?  '' : <p className={styles.error}>Your Password is not matching</p> }
               <div className={styles.Loginbutton}>
                 <span>
                   <input

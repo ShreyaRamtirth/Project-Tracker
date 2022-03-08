@@ -14,25 +14,30 @@ import axios from "./api/hello.js";
 const headers = {
   "Content-Type": "application/json",
 };
+
 function getuser() {
+  
   const [usernameFields, setUsernameFields] = useState("");
   const [usererror, setError] = useState(true);
-
+  const [disabled, setDisabled] = useState(false);
   const router = useRouter();
   const Formvalidation = (e) => {
     setUsernameFields(e.target.value);
     if (validEmail.test(e.target.value)) setError(true);
     else setError(false);
   }
-
+  module.exports = { variableName: usernameFields };
   const sendOtpHandler = () =>{
+    
     usernameFields=== "" || usererror ? 
     sendUserName()
-    : toast.error("Please Enter username!");  
+    : toast.error("Please Enter Valid username!");  
   }
 
   const sendUserName = async () => {
+   
     try {
+      setDisabled(true);
       const response = await axios.post(
         GET_USER_URL,
         {
@@ -40,11 +45,11 @@ function getuser() {
         },
         { headers: headers }
       );
-      // cookieCutter.set("jwt", response.data.jwt);
-        console.log(response);
-      router.push("/dashboard");
+        response.data ? 
+       router.push("/forgotpass") :  toast.error("Sorry! Username is not Valid.");
     } catch (error) {
-      toast.error("Invalid Username or Password");
+      toast.error("Sorry! Username is not Valid.");
+      setDisabled(false);
     }
   };
 
@@ -85,6 +90,7 @@ function getuser() {
                     className={styles.loginBtn}
                     type="button"
                     value="Send OTP"
+                    disabled={disabled}
                     onClick={sendOtpHandler}
                   />
                 </span>
@@ -113,3 +119,4 @@ function getuser() {
 }
 
 export default getuser;
+
