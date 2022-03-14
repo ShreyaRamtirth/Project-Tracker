@@ -1,0 +1,34 @@
+.navBarContainer{
+    height: 80px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    position: sticky;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    cursor: pointer;
+}
+.avtarProfile{
+    border-radius: 50%;
+    box-shadow: 1px 2px 25px rgba(0, 0, 0, 0.349);
+    margin: 5px;
+}
+.MenuContainer{
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.menuItem{
+    padding: 10px;
+}
+.arrowUp {
+    float: right;
+    width: 0px; 
+    height: 0; 
+    margin-right: 28px;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 15px solid aliceblue;
+    
+  }

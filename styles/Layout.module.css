@@ -9,8 +9,9 @@
 }
 .mainContainer{
     width: 85%;
-    height: 100vh;
-    background: url(https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg);
+    height: auto;
+    /* background: url(https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg) no-repeat #000; */
     background-size: cover;
-  display: flex;
+    /* background-repeat: repeat-x; */
+    /* background-size: 100%; */
 }

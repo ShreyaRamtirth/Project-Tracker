@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import ReactCodeInput from "react-verification-code-input";
 import styles from "../styles/Home.module.css";
 import image from "../public/Vias-Logo.png";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import { SEND_OTP } from "../pages/api/endpoints";
 import { variableName } from "./getuser";
 import { useRouter } from "next/router";
+import axios from "./api/hello";
 
 function forgotpass() {
   const headers = {
@@ -18,20 +19,23 @@ function forgotpass() {
   const [codeFields, setCodeFields] = useState("");
   const router = useRouter();
   const verifyOTP = async () => {
+    
     if (passerror) {
       try {
-        // const response = await axios.post(
-        //   SEND_OTP,
-        //   {
-        //     username: variableName,
-        //     OTPcode: codeFields
-        //   },
-        //   { headers: headers }
-        // );
+        const response = await axios.post(
+          SEND_OTP,
+          {
+            username: variableName,
+            otp: codeFields
+          },
+          { headers: headers }
+        );
+        response.data ?
+        router.push("/resetpass") : toast.error("not valid code.");
         
-        router.push("/resetpass");
       } catch (error) {
         toast.error("Invalid Code");
+        console.log(error);
       }
     } else {
       toast.error("Enter valid code");

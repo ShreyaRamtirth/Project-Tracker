@@ -1,6 +1,7 @@
 import Sidebarmenu from "./Sidebarmenu";
 import styles from '../styles/Layout.module.css';
-import authenticateUser from "./authenticateUser";
+import {authenticateUser} from "./authenticateUser";
+import NavBar from "./NavBar";
 
 const Layout=( {children} )=>{
   
@@ -13,15 +14,18 @@ const Layout=( {children} )=>{
     }    
     else{
       
-        if(authenticateUser())
+        if(authenticateUser)
         {
         return(
 
             <div className={styles.bodyContainer}>
                 <div className={styles.sidebarContainer}>
                     <Sidebarmenu />
+                    
                 </div>
+                
                 <div className={styles.mainContainer}>
+                <NavBar></NavBar>
                  {children}</div>
             </div>
         )}else

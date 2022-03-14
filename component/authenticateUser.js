@@ -4,15 +4,12 @@ import cookieCutter from 'cookie-cutter';
 
 
 
-export default function(){
+export function authenticateUser(){
     
     const router = useRouter();       
       try {
-       if (  cookieCutter.get('jwt') === undefined) {  router.push("/"); return false} else  console.log('don go')
+       if (  cookieCutter.get('jwt') === undefined) {  router.push("/"); return false} 
       } catch (error) {
           console.log(error);
-      }
-      return true;
-    
-    
+      } 
 }

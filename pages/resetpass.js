@@ -3,15 +3,28 @@ import styles from "../styles/Home.module.css";
 import image from "../public/Vias-Logo.png";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validPassword } from "../component/Regex";
 import ReactTooltip from 'react-tooltip';
-function resetpass() {
-  const [passerror, setPassError] = useState(true);
-  const [passwordFields, setPasswordFields] = useState("");
-  const [repasserror, setrePassError] = useState(true);
+import { variableName } from "./getuser";
+import { useRouter } from "next/router";
+import { RESETPASS } from "./api/endpoints";
+import axios  from "./api/hello";
 
+function resetpass() {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const [passerror, setPassError] = useState(true);
+  const [passwordFields, setPasswordFields] = useState('');
+  const [repasserror, setrePassError] = useState(true);
+  const [mount, setMount] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    setMount(true);
+  });
   const Formvalidation = (e) =>{
     setPasswordFields(e.target.value);
   
@@ -28,6 +41,35 @@ function resetpass() {
       setrePassError(true);
     }else{
       setrePassError(false);
+    }
+  }
+
+  const handlePassSubmit = (e) =>{
+
+    passwordFields !== '' &&  passerror && repasserror ? ResetPasseord() : console.log("false")
+  }
+
+  const ResetPasseord = async () =>{
+    if (passwordFields !== '' &&  passerror && repasserror) {
+      try {
+        const response = await axios.post(
+          RESETPASS,
+          {
+            username: variableName,
+            password: passwordFields
+          },
+          { headers: headers }
+        );
+        response.data ?
+        router.push("/") : toast.error("Please verify all fields");
+        
+      } catch (error) {
+        toast.error("Please verify fields");
+        console.log(error,variableName,passwordFields);
+      }
+      
+    } else {
+      toast.error("Please verify all fields");
     }
   }
 
@@ -63,9 +105,9 @@ function resetpass() {
                   />
                 </div>
                 {passerror ? "" : <p className={styles.error}>Password is Invalid</p>}
-                <ReactTooltip place="right" type="info" effect="float" 
+                {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
-                />
+                /> }
                 <div className={styles.passwordBox}>
                   <span className={styles.LabelPassword}>
                     <RiLockPasswordFill />
@@ -91,6 +133,7 @@ function resetpass() {
                     className={styles.loginBtn}
                     type="button"
                     value="Submit"
+                    onClick={handlePassSubmit}
                   />
                 </span>
                 <ToastContainer
@@ -104,7 +147,7 @@ function resetpass() {
                   draggable
                   pauseOnHover
                 />
-                <ToastContainer />
+                
               </div>
               <div className={styles.forgot}>
                 <span className={styles.forgotText}>Back to Login</span>

@@ -6,11 +6,27 @@ import Link from "next/link";
 import styles from "../styles/Sidebarmenu.module.css";
 import image from "../public/Vias-Logo.png";
 import Image from "next/image";
-import authenticateUser from "./authenticateUser";
+import { useRouter } from "next/router";
+import {authenticateUser} from "./authenticateUser";
 
-function Sidebarmenu() {
+// import { useState } from "react";
+
+const Sidebarmenu=()=> {
+  
+  const router = useRouter();
+  // const setActiveLink = (e) =>{
+  //   console.log(e);
+  //   // console.log(e.target.value, "value added");
+  // }
+
+
+
   return (
+ 
+       
+     
     <div className={styles.sidebarComponent}>
+  
       <div className={styles.logobox}>
         <Image src={image} />
 
@@ -18,7 +34,7 @@ function Sidebarmenu() {
       </div>
       <div className={styles.line}></div>
       <div className={styles.menus}>
-        <div className={styles.itemnav}>
+        <div className={router.pathname === "/dashboard" ?  styles.itemnavActive : styles.itemnav } >
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <FaHome />
@@ -27,24 +43,25 @@ function Sidebarmenu() {
               <Link href="/dashboard">
                 <a>Dashboard</a>
               </Link>
+              
             </span>
           </div>
         </div>
 
-        <div className={styles.itemnav}>
+        <div className={router.pathname === "/project" ?  styles.itemnavActive : styles.itemnav }>
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <GoProject />
             </span>
             <span className={styles.itemname}>
-              <Link href="/project">
+              <Link href="/project" >
                 <a>Project</a>
               </Link>
             </span>
           </div>
         </div>
 
-        <div className={styles.itemnav}>
+        <div className={router.pathname === "/employee" ?  styles.itemnavActive : styles.itemnav }>
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <BsFillPersonLinesFill />
@@ -57,7 +74,7 @@ function Sidebarmenu() {
           </div>
         </div>
 
-        <div className={styles.itemnav}>
+        <div className={router.pathname === "/client" ?  styles.itemnavActive : styles.itemnav }>
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <GoPerson />
@@ -70,7 +87,7 @@ function Sidebarmenu() {
           </div>
         </div>
 
-        <div className={styles.itemnav}>
+        <div className={router.pathname === "/setting" ?  styles.itemnavActive : styles.itemnav }>
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <GoSettings />
@@ -85,6 +102,7 @@ function Sidebarmenu() {
       </div>
       {/* <User image={image}  username={'shreya'}/> */}
     </div>
+  
   );
 }
 
