@@ -11,8 +11,6 @@ import axios from "axios";
 import { GETPROJECT , TOTALPROJECT } from "./api/endpoints";
 import cookieCutter from 'cookie-cutter';
 
-
-
 function project() {
  
   const [mount, setMount] = useState(false);
