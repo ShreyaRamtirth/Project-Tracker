@@ -1,3 +1,5 @@
+
+
 .projectContainer{
     padding: 10px;
     /* background-color: rgba(76, 76, 77, 0.178); */
@@ -101,4 +103,27 @@
   }
   .pencil{
       font-size: 20px;
+  }
+
+  .pagination {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+  }
+  
+  .pagination li {
+    font-weight: 600;
+    color: black;
+    padding: 8px 16px;
+    background-color: rgb(209, 203, 203);
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid rgb(255, 255, 255);
+    list-style: none;
+  }
+  
+  .pagination .ulActive {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
   }

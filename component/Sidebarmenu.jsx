@@ -9,17 +9,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import {authenticateUser} from "./authenticateUser";
 
-// import { useState } from "react";
-
 const Sidebarmenu=()=> {
   
   const router = useRouter();
-  // const setActiveLink = (e) =>{
-  //   console.log(e);
-  //   // console.log(e.target.value, "value added");
-  // }
-
-
 
   return (
  
@@ -48,12 +40,13 @@ const Sidebarmenu=()=> {
           </div>
         </div>
 
-        <div className={router.pathname === "/project" ?  styles.itemnavActive : styles.itemnav }>
+        <div className={router.pathname === "/project" ?  styles.itemnavActive : styles.itemnav } >
           <div className={styles.itemlink}>
             <span className={styles.itemicon}>
               <GoProject />
             </span>
             <span className={styles.itemname}>
+              
               <Link href="/project" >
                 <a>Project</a>
               </Link>

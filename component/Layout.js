@@ -18,7 +18,7 @@ const Layout=( {children} )=>{
         {
         return(
 
-            <div className={styles.bodyContainer}>
+            <div className={styles.bodyContainer} >
                 <div className={styles.sidebarContainer}>
                     <Sidebarmenu />
                     
