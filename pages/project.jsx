@@ -3,6 +3,7 @@ import styles from "../styles/Project.module.css";
 import { FcSearch } from "react-icons/fc";
 import { HiFolderAdd } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
+import {AiOutlineDoubleLeft, AiOutlineDoubleRight} from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 import Link from "next/link";
 import LinesEllipsis from "react-lines-ellipsis";
@@ -19,6 +20,8 @@ function project() {
   const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState([]);
   const [countProject, setCountProject] = useState();
+  const [showActive, setShowActive] = useState(false);
+
   useEffect(() => {
     setMount(true);
     setStopEffect(true);
@@ -123,14 +126,14 @@ function project() {
           </div>
         ))}
       </div>
-
-      <div>
+                {console.log(pageNumber)}
+      <div className={styles.paginationWrapper}>
           <ul className={styles.pagination}>
-            
-          {[...Array(countProject)].map((x, i) =>
-    <li key={i} onClick={(i) => { console.log(i.target.outerText) }}  >{i+1}</li> 
-  )}
-          
+            <li className={styles.paginationbtn}><AiOutlineDoubleLeft /></li>
+          {[...Array(countProject)].map((x, i) => 
+    <li key={i} value={i} onClick={(i) => { setPageNumber(i.target.outerText); setShowActive(true) }} className={showActive ? styles.ulActive : ''}  >{i+1}  </li> 
+  )}  
+          <li className={styles.paginationbtn}><AiOutlineDoubleRight /></li>
           </ul>
       </div>
     </div>
