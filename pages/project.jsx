@@ -3,70 +3,102 @@ import styles from "../styles/Project.module.css";
 import { FcSearch } from "react-icons/fc";
 import { HiFolderAdd } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
-import {AiOutlineDoubleLeft, AiOutlineDoubleRight} from "react-icons/ai";
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 import Link from "next/link";
 import LinesEllipsis from "react-lines-ellipsis";
 import ProgressBar from "@ramonak/react-progress-bar";
 import axios from "axios";
-import { GETPROJECT , TOTALPROJECT } from "./api/endpoints";
-import cookieCutter from 'cookie-cutter';
+import { GETPROJECT, TOTALPROJECT, GETPAGE } from "./api/endpoints";
+import cookieCutter from "cookie-cutter";
 
 function project() {
- 
   const [mount, setMount] = useState(false);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
   const [stopEffect, setStopEffect] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [data, setData] = useState([]);
   const [countProject, setCountProject] = useState();
-  const [showActive, setShowActive] = useState(false);
+  const [postPage, setPostPage] = useState(1);
+  const [countArray, setCountArray] = useState(0);
 
   useEffect(() => {
     setMount(true);
     setStopEffect(true);
-    axios(GETPROJECT + "/" +filter , {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json' ,
-      'Authorization': 'Bearer ' + cookieCutter.get('jwt') },
     
-    }).then(response => {
-      setData(response.data);
-      console.log(response.data);
-    }).catch(error => {
-      
-      console.log(error);
-    }) 
-    
-
-    axios(TOTALPROJECT, {
+    if ( filter !== "" && filter !== undefined ){
+     
+    axios(GETPROJECT + "/" + filter, {
       method: "GET",
-      headers: { 'Content-Type': 'application/json' ,
-      'Authorization': 'Bearer ' + cookieCutter.get('jwt') },
-    }).then(response => {
-      setCountProject(Math.ceil(response.data  / 2));  // divide by 2 means 2 post on 1 page
-    }).catch(error => {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookieCutter.get("jwt"),
+      },
+    })
+      .then((response) => {
+        setData(response.data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+   
+    axios(TOTALPROJECT + "/" + filter, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookieCutter.get("jwt"),
+      },
+    })
+      .then((response) => {
+        setCountProject(Math.ceil(response.data / 4)); // divide by 2 means 2 post on 1 page
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+     
+    if( filter === '' || filter === undefined ) {
+    try {
+      axios(GETPAGE + postPage, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + cookieCutter.get("jwt"),
+        },
+      })
+        .then((response) => {
+          setData(response.data);
+       
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
       console.log(error);
-    }) 
-
-
-  }, [filter] );
-
-  const searchProject = (e) =>{
-    setFilter(e.target.value);
-    console.log(filter);
+    } 
   }
+  }, [filter, pageNumber]);
 
+  const searchProject = (e) => {
+    setFilter(e.target.value);
+
+  };
+ 
+  
 
   return (
-    <div className={styles.projectContainer}  >
+    <div className={styles.projectContainer}>
       <div className={styles.menuProject}>
         <div className={styles.menuProjectItem}>
           <input
             type="search"
             className={styles.searchMenu}
             placeholder="Search Project"
-            onChange={e => searchProject(e) }
+            onChange={(e) => searchProject(e)}
           />
 
           <FcSearch className={styles.searchSubmit} />
@@ -82,14 +114,14 @@ function project() {
         </div>
       </div>
       <div className={styles.projectPostContainer}>
-       {/* { console.log("ithalache ",data) } */}
-        {  data.map((n) => (
+     
+        {data.map((n) => (
           <div className={styles.projectMaxContainer} key={n.pid}>
             <div className={styles.projectBase}>
               <div className={styles.projectProgress}>
                 <ProgressBar completed={n.progress} bgColor="#0384fc" />
               </div>
-              <Link href={"/projects/" + n}>
+              <Link href={"/projects/" + n.pid}>
                 <a>
                   <div className={styles.projectTitle}>
                     <h4>{n.title}</h4>
@@ -104,18 +136,15 @@ function project() {
                 </Link>
               </div>
               <div className={styles.projectBadges}>
-                
-              { n.technologies.map((i) =>
-                <div
-                  className={styles.Badges} key={i.tid}
-                >
-                  {i.technologyName}
-                </div>
-               ) }
+                {n.technologies.map((i) => (
+                  <div className={styles.Badges} key={i.tid}>
+                    {i.technologyName}
+                  </div>
+                ))}
               </div>
               <div className={styles.projectDesc}>
                 <LinesEllipsis
-                  text= {n.description}
+                  text={n.description}
                   maxLine={3}
                   ellipsis="..."
                   trimRight
@@ -126,15 +155,43 @@ function project() {
           </div>
         ))}
       </div>
-                {console.log(pageNumber)}
+      
       <div className={styles.paginationWrapper}>
-          <ul className={styles.pagination}>
-            <li className={styles.paginationbtn}><AiOutlineDoubleLeft /></li>
-          {[...Array(countProject)].map((x, i) => 
-    <li key={i} value={i} onClick={(i) => { setPageNumber(i.target.outerText); setShowActive(true) }} className={showActive ? styles.ulActive : ''}  >{i+1}  </li> 
-  )}  
-          <li className={styles.paginationbtn}><AiOutlineDoubleRight /></li>
-          </ul>
+        <ul className={styles.pagination}>
+          <li
+            className={styles.paginationbtn}
+            onClick={() => {
+              setPageNumber(pageNumber === 0 ? 0 : pageNumber - 1);
+              setPostPage(pageNumber);
+             
+            }}
+          >
+            <AiOutlineDoubleLeft />
+          </li>
+          {[...Array(countProject)].map((x, i) => (
+            <li
+              key={i}
+              onClick={() => {
+                setPageNumber(i);
+                setPostPage(i+1);
+              }}
+              className={pageNumber === i ? styles.ulActive : ""}
+            >
+              {i + 1}{" "}
+            </li>
+          ))}
+          <li
+            className={styles.paginationbtn}
+            onClick={() => {
+              setPageNumber(
+                pageNumber >= countProject-1 ? countProject-1 : pageNumber + 1
+              );
+              setPostPage(pageNumber+2);
+            }}
+          >
+            <AiOutlineDoubleRight />
+          </li>
+        </ul>
       </div>
     </div>
   );

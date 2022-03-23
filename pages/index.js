@@ -135,7 +135,7 @@ export default function Home() {
                 draggable
                 pauseOnHover
               />
-              <ToastContainer />
+              
             </div>
             <div className={styles.forgot}>
               <span className={styles.forgotText}> <Link href="/getuser"><a>Forgot Password?</a></Link> </span>
