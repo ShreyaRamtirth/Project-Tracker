@@ -129,7 +129,7 @@ function project() {
                 </a>
               </Link>
               <div className={styles.projectEdit}>
-                <Link href={"#"}>
+                <Link href={"projects/edits/" + n.pid}>
                   <a>
                     <FaPencilAlt className={styles.pencil} />
                   </a>

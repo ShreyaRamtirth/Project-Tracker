@@ -146,14 +146,14 @@ font-weight: 500;
     color: #252b309a;
     font-size: 15px;
   }
-  .projectDesc{
+  /* .projectDesc{
     margin: 20px 10px 10px 0px;
     padding: 10px;
     font-size: 16px;
     border-radius: 15px;
     box-shadow: 5px 10px 15px rgba(211, 198, 198, 0.486);
     border: 1px solid rgb(105, 104, 104);
-  }
+  } */
   .projectEmployee{
     margin: 15px;
     font-size: 16px;
@@ -168,4 +168,15 @@ font-weight: 500;
     margin: 15px;
    
   }
- 
+  
+  .tasks{
+    width: 100%;
+    border: 1px solid #ddd;
+  text-align: left;
+    border-collapse: collapse;
+  }
+  .taskRow{
+    border: 1px solid #ddd;
+  text-align: left;
+  padding: 15px;
+  }

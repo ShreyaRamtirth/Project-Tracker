@@ -5,14 +5,20 @@ import { FaPencilAlt } from "react-icons/fa";
 import cookieCutter from "cookie-cutter";
 import axios from "axios";
 import { GETPROJECTDETAILS } from "../api/endpoints";
-
+import Link from "next/link";
 const Post = () => {
   const router = useRouter();
   const pname = router.query;
-
+  const [data, setData] = useState('');
+  const [pno, setPno] = useState(undefined);
+  const [tech, setTech] = useState(undefined);
+  const [task, setTask] = useState(undefined);
   useEffect(() => {
-    {
-      axios(GETPROJECTDETAILS + pname.slug, {
+    setPno(pname.slug);
+    if(!router.isReady) return;
+   
+  if(pname.slug !== undefined ){
+     axios(GETPROJECTDETAILS +pname.slug, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -21,59 +27,90 @@ const Post = () => {
       })
         .then((response) => {
           setData(response.data);
+          setTech(data["project"]["technologies"]);
+          setTask(data["taskInfoList"]);
         })
         .catch((error) => {
           console.log(error);
         });
-    }
-  });
-const n = ['Bruce', 'Clark', 'Diana'];
-  return (
-    <div className={styles.projectContainer}>
-      <div className={styles.projectMaxContainer}>
-        <div className={styles.projectBase}>
-          <div className={styles.projectEdit}>
-            <a>
-              <FaPencilAlt className={styles.pencil} />
-            </a>
-          </div>
-          <div className={styles.projectTitle}>
-            <h4>TITLE</h4>
-          </div>
-          <div className={styles.projectDate}>
-            Added on 12/09/2021
-          </div>
-          <div className={styles.projectBadges}>
-                {n.map((i) => (
-                  <div className={styles.Badges} key={i.tid}>
-                    {i}
-                  </div>
-                ))}
-              </div>
-              <div className={styles.projectDesc}>
-                <p>lorem ipsimhsdgfsyh sghdvfyhsdfs ghsdvfhdsbfhsdf dysgfyusgg</p>
-              </div>
-              {n.map((i) => (
-              <div className={styles.projectEmployee} key={i.tid}>
-                Employees/ Interns
-                {i}
-              </div>
-               ))}
-               <div className={styles.deadline} >
-                 dadline = 26 jan 2022
-               </div>
-               <div className={styles.tasksContainer} >
-               <div className={styles.tasks} >
-                  <p>tasks</p>
-                  <p>tasks</p> 
-                  <p>tasks</p>
+      }
+  },[router.isReady]);
+ 
+
+  if (pno!== undefined && data)
+  {
+    return (
+   
+      <div className={styles.projectContainer}>
+   {/* { setTech(data["project"]["technologies"])}      */}
+        <div className={styles.projectMaxContainer}>
+          <div className={styles.projectBase}>
+            <div className={styles.projectEdit}>
+              <Link href={"/projects/edits/" + pname.slug}><a>
+                <FaPencilAlt className={styles.pencil} />
+              </a></Link>
+            </div>
+            
+             <div className={styles.projectTitle}>
+              <h4>{data["project"]["title"]}</h4>
+            </div>
+            <div className={styles.projectDate}>
+              Added on {data["project"]["dateAdded"]}
+            </div>
+            <div className={styles.projectBadges}>
+              
+                  {data["project"]["technologies"].map((i) => (
+                    <div className={styles.Badges} key={i.tid}>
+                      {i.technologyName}
+                    </div>
+                  ))}
                 </div>
-             
-               </div>
+                <div className={styles.projectDesc}>
+                  <p>{data["project"]["description"]}</p>
+                </div>
+                <hr />
+              
+                 <div className={styles.deadline} >
+                   Deadline = {data["project"]["deadline"]}
+                 </div>
+                 <div className={styles.tasksContainer} >
+                 <div>
+                 <table className={styles.tasks}>
+                 <tr className={styles.taskRow}>
+    <th className={styles.taskRow}>Task</th>
+    <th className={styles.taskRow}>Intern</th>
+    <th className={styles.taskRow}>Status</th>
+  </tr>
+                 {data["taskInfoList"].map((i) => (
+                   <tr className={styles.taskRow} ><td className={styles.taskRow}> 
+                    <div className={styles.task} key={i.taskId}>
+                      {i.task}
+                      </div>
+                      </td>
+                      <td className={styles.taskRow}>
+                      <div className={styles.taskGiven} >
+                      {i.username}
+                    </div></td>
+                    <td className={styles.taskRow}>
+                    <div className={styles.taskDisplay} >
+                      { i.completed ? 'Completed' : 'Not Completed' }
+                    </div>
+                    </td>
+                    
+                    </tr>
+                  ))}
+                  </table>
+                  </div>
+               
+                 </div> 
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else{
+    return <h1>Fetching</h1>
+  }
+  
 };
 
 export default Post;
