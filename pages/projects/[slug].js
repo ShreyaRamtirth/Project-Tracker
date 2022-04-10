@@ -73,8 +73,9 @@ const Post = () => {
                  <div className={styles.deadline} >
                    Deadline = {data["project"]["deadline"]}
                  </div>
+                
                  <div className={styles.tasksContainer} >
-                 <div>
+                
                  <table className={styles.tasks}>
                  <tr className={styles.taskRow}>
     <th className={styles.taskRow}>Task</th>
@@ -102,7 +103,7 @@ const Post = () => {
                   </table>
                   </div>
                
-                 </div> 
+                 
           </div>
         </div>
       </div>

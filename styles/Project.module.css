@@ -166,7 +166,7 @@ font-weight: 500;
   }
   .tasksContainer{
     margin: 15px;
-   
+   font-size: 17px;
   }
   
   .tasks{
@@ -180,3 +180,59 @@ font-weight: 500;
   text-align: left;
   padding: 15px;
   }
+  .textAreaContainer{
+    
+      width: 100%;
+      height: 150px;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+      border-style: dashed;
+    
+  }
+  .textAreaContainer:focus{
+    border-style: dashed;
+    border-color: #034675;
+    outline-style: dashed;
+    outline-color: #034675;
+  }
+  .deadlinePicker{
+    padding: 5px;
+    margin: 5px;
+  }
+  .taskInput{
+   padding: 15px;
+   margin: 10px;
+   outline: 5px;
+   border-radius: 25px;
+    /* border-bottom: 1px solid #000; */
+    height: 20px;
+    
+    font-size: 15px;
+  }
+  .addBtn{
+    outline: none;
+    border: none;
+    padding-left: 50px;
+    padding-right: 50px;
+    background: rgba(255, 255, 255, 0.349);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    transition: all 0.5s ease;
+  }
+  .addBtn:hover{
+    background-color: var(--sidebar-background-color);
+    color: aliceblue;
+    transform: scaleX(1.1);
+  }
+.submitContainer{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}

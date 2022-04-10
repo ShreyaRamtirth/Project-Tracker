@@ -7,6 +7,7 @@ const GETPROJECT = "http://localhost:8080/getprojects/search";
 const TOTALPROJECT = "http://localhost:8080/count";
 const GETPAGE = "http://localhost:8080/getprojects/page/";
 const GETPROJECTDETAILS = "http://localhost:8080/getproject/";
+const UpdateProject = "http://localhost:8080/project/update";
 export {
     LOGIN_URL,
     VALIDATE_URL,
@@ -16,5 +17,6 @@ export {
     GETPROJECT,
     TOTALPROJECT,
     GETPAGE,
-    GETPROJECTDETAILS
+    GETPROJECTDETAILS,
+    UpdateProject
 }
