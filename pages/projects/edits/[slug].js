@@ -72,8 +72,6 @@ function Edits() {
           description: description,
           deadline: date,
           tasks: mergeArr
-         
-
         },
         { headers: {
           "Content-Type": "application/json",

@@ -1,0 +1,13 @@
+.projectContainer{
+    padding: 10px;
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, 0.589);
+    background-color: rgba(206, 206, 206, 0.589);
+    background-size: cover;
+}
+.projectBase{
+    margin:0 20px 30px 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 15px 20px rgba(78, 75, 75, 0.685);
+    background-color: aliceblue;
+}

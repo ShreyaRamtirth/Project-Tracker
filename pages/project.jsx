@@ -3,6 +3,7 @@ import styles from "../styles/Project.module.css";
 import { FcSearch } from "react-icons/fc";
 import { HiFolderAdd } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
+import { useRouter } from "next/router";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 import Link from "next/link";
@@ -21,7 +22,7 @@ function project() {
   const [countProject, setCountProject] = useState();
   const [postPage, setPostPage] = useState(1);
   const [countArray, setCountArray] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {
     setMount(true);
     setStopEffect(true);
@@ -104,7 +105,7 @@ function project() {
           <FcSearch className={styles.searchSubmit} />
         </div>
         <div className={styles.menuProjectItem}>
-          <button className={styles.inputAddBtn} data-tip="Create">
+          <button className={styles.inputAddBtn} data-tip="Create" onClick={()=>router.push("/createproject")} >
             {" "}
             <HiFolderAdd />{" "}
             {mount && (

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@pathofdev/react-tag-input": "^1.0.7",
     "@ramonak/react-progress-bar": "^4.4.0",
     "axios": "^0.26.0",
     "cookie-cutter": "^0.2.0",
