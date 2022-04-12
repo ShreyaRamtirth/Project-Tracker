@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/Project.module.css";
+import "react-toastify/dist/ReactToastify.css";
 import cookieCutter from "cookie-cutter";
 import axios from "axios";
 import { GETPROJECTDETAILS, UpdateProject } from "../../api/endpoints";
@@ -15,15 +16,16 @@ function Edits() {
   const [date, setDate] = useState();
   const [pno, setPno] = useState(undefined);
   const [newTask, setNewTask] = useState();
-  const [newTaskArr, setNewTaskArr] = useState([]);
-  const [mergeArr, setMergeArr] = useState([]);
-  const [addTask, setAddTask] = useState([]);
+  const [newTaskArr, setNewTaskArr] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
+  const [mergeArr, setMergeArr] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
+  const [addTask, setAddTask] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
   const [interns, setInterns] = useState();
   const [assignedIntern, setAssignedIntern] = useState();
   const [description, setDescription] = useState();
   const [completed, setCompleted] = useState("Not Completed");
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const currentDate = new Date().toISOString().slice(0, 10);
   useEffect(() => {
     setPno(pname.slug);
     if (!router.isReady) return;
@@ -40,6 +42,7 @@ function Edits() {
           setData(response.data);
           // setTech(data["project"]["technologies"]);
           setAddTask(data["taskInfoList"]);
+          // setMergeArr( data["taskInfoList"].concat(newTaskArr) );
           // setInterns(data["interns"]);
         })
         .catch((error) => {
@@ -47,42 +50,55 @@ function Edits() {
         });
     }
   }, [router.isReady]);
-  const currentDate = new Date().toISOString().slice(0, 10);
+
+  useEffect(()=>{
+
+  } )
   
+  
+  const handleAdd = () =>{
+    if(newTaskArr === [] ){
+      setNewTaskArr([{task : newTask, username : "", assigned_on: currentDate, completed: false }]);  
+    }else
+    {
+      setNewTaskArr([...newTaskArr,  {task : newTask, username : "", assigned_on: currentDate, completed: false }]);
+    }
+    // console.log("newtask",newTaskArr);
+
+  }
 
   const handleProjectEdit = async() => {
-    // console.log(data["taskInfoList"]);
-    // console.log("newTaskArr" , newTaskArr);
-    // setMergeArr( ...data["taskInfoList"], ...newTaskArr  );
-    setMergeArr( data["taskInfoList"].concat(newTaskArr) );
-    // console.log("mergeTaskArr" , mergeArr);
-    // console.log("pno", pno);
-    // console.log("description", description);
-    // console.log("deadline", date);
-    // console.log("tasks", addTask);
-    // console.log("assigned_on", currentDate);
-    // console.log("interns", selectedOption);
-    // console.log("completed", completed);
+ 
+    
+    
+      try {
+        setMergeArr( data["taskInfoList"].concat(newTaskArr) );
+        console.log(mergeArr);
+        console.log(newTaskArr);
 
-    try {
-      const response = await axios.post(
-        UpdateProject,
-        {
-          pId: pno,
-          description: description,
-          deadline: date,
-          tasks: mergeArr
-        },
-        { headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + cookieCutter.get("jwt"),
-        } }
-      );
-
-    } catch (error) {
-    toast.error("Invalid Details");
-    console.log(error);
-    }
+        const response = await axios.post(
+          UpdateProject,
+          {
+            project:{
+            pId: pno,
+            description: description,
+            deadline: date,
+            },
+            taskInfoList: mergeArr
+          },
+          { headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + cookieCutter.get("jwt"),
+          } }
+        );
+        
+      } catch (error) {
+        console.log(mergeArr);  
+      toast.error("Invalid Details");
+      console.log(error);
+      }
+    
+     
   }
 
   if (pno !== undefined && data) 
@@ -139,11 +155,7 @@ function Edits() {
                         
                       }}
                     />
-                    <input type="button" value="Add" className={styles.addBtn} onClick={(e) => {
-                        setNewTaskArr([...newTaskArr,  {task : newTask, username : "", assigned_on: currentDate, completed: false }]);
-                        // console.log(newTaskArr)
-                        
-                      }} />
+                    <input type="button" value="Add" className={styles.addBtn} onClick={handleAdd} />
                   </div>
 
                   <table className={styles.tasks}>
@@ -179,7 +191,7 @@ function Edits() {
                     {newTaskArr.map((i)=>(
                     <tr key={i.task} className={styles.taskRow}>
                     <td className={styles.taskRow}>
-                      {console.log(newTask)}
+                      {/* {console.log(newTask)} */}
                     {i.task}
                     </td>
                     <td className={styles.taskRow}>
