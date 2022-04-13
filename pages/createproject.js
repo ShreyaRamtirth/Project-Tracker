@@ -7,15 +7,28 @@ import {CreateProject} from './api/endpoints';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-
-  const headers = {
-    "Content-Type": "application/json",
-  }
+import cookieCutter from "cookie-cutter";
+import axios from 'axios';
  
   const currentDate = new Date().toISOString().slice(0, 10);
-  const  handleSubmit =  async () => {
+  
+
+
+function createproject() {
+
+  const [title, setTitle] = useState("");
+  
+  const [desc, setDesc] = useState("");
+  const [deadline, setDeadline] = useState();
+  const [cost, setCost] = useState();
+  const router = useRouter();
+    const [tags, setTags] = useState([ ]);
+
+
+
+    const  handleSubmit =  async () => {
     
-    if (passerror) {
+     
       try {
         const response = await axios.post(
           CreateProject,
@@ -26,35 +39,25 @@ import { useRouter } from "next/router";
             deadline: deadline,
             cost: cost,
             description: desc,
-            technologies: tags
+            technologies: tags.join(",")
 
           },
-          { headers: headers }
+          { headers : {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + cookieCutter.get("jwt")
+          } }
         );
         response.data ?
-        router.push("/projects") : toast.error("not valid.");
+        toast.success("Information Added Succefully.") : toast.error("not valid.");
         
       } catch (error) {
         toast.error("Invalid Details");
         console.log(error);
       }
-    } else {
-      toast.error("Invalid Information");
-    }
+    
+    
   };
 
-
-
-function createproject() {
-  const [passerror, setPassError] = useState(false);
-  const [codeFields, setCodeFields] = useState("");
-  const [title, setTitle] = useState("");
-  
-  const [desc, setDesc] = useState("");
-  const [deadline, setDeadline] = useState();
-  const [cost, setCost] = useState();
-  const router = useRouter();
-    const [tags, setTags] = useState([ ]);
   return (
     
     <div className={styles.projectContainer}>
@@ -106,7 +109,10 @@ function createproject() {
               <div className={styles.projectCurrency}>
                 <label className={styles.projectCost}>Cost</label>
                 <CurrencyFormat className={styles.currency} thousandSeparator={true}  prefix={'₹'} 
-                onChange={(e)=> setCost(e.target.value) }
+                onChange={(values) => {
+                  const {formattedValue, value} = values
+                setCost(value)
+                }}
                 />
               </div>
 
