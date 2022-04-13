@@ -7,11 +7,10 @@ import {CreateEmployee} from './api/endpoints';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import axios from 'axios';
+import cookieCutter from "cookie-cutter";
 
 
-const headers = {
-  "Content-Type": "application/json",
-}
 
 const currentDate = new Date().toISOString().slice(0, 10);
 
@@ -62,10 +61,13 @@ function Employee() {
             roles: role
   
           },
-          { headers: headers }
+          { headers : {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + cookieCutter.get("jwt")
+          } }
         );
         response.data ?
-        router.push("/projects") : toast.error("not valid.");
+        toast.success("Information Added Succesfully.") : toast.error("not valid.");
         
       } catch (error) {
         toast.error("Invalid Details");

@@ -9,7 +9,7 @@ const GETPAGE = "http://localhost:8080/getprojects/page/";
 const GETPROJECTDETAILS = "http://localhost:8080/getproject/";
 const UpdateProject = "http://localhost:8080/project/update";
 const CreateProject = "http://localhost:8080/project/add";
-const CreateEmployee = "http://localhost:8080/employee/add";
+const CreateEmployee = "http://localhost:8080/user/add";
 export {
     LOGIN_URL,
     VALIDATE_URL,
