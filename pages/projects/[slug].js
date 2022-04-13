@@ -60,8 +60,8 @@ const Post = () => {
             <div className={styles.projectBadges}>
               
                   {data["project"]["technologies"].map((i) => (
-                    <div className={styles.Badges} key={i.tid}>
-                      {i.technologyName}
+                    <div className={styles.Badges} key={i}>
+                      {i}
                     </div>
                   ))}
                 </div>

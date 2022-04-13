@@ -16,7 +16,7 @@ function Edits() {
   const [date, setDate] = useState();
   const [pno, setPno] = useState(undefined);
   const [newTask, setNewTask] = useState();
-  const [newTaskArr, setNewTaskArr] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
+  const [newTaskArr, setNewTaskArr] = useState([]);
   const [mergeArr, setMergeArr] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
   const [addTask, setAddTask] = useState([{task : newTask, username : "", assigned_on: "", completed: false }]);
   const [interns, setInterns] = useState();
@@ -114,8 +114,8 @@ function Edits() {
               </div>
               <div className={styles.projectBadges}>
                 {data["project"]["technologies"].map((i) => (
-                  <div className={styles.Badges} key={i.tid}>
-                    {i.technologyName}
+                  <div className={styles.Badges} key={i}>
+                    {i}
                   </div>
                 ))}
               </div>

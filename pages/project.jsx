@@ -138,8 +138,8 @@ function project() {
               </div>
               <div className={styles.projectBadges}>
                 {n.technologies.map((i) => (
-                  <div className={styles.Badges} key={i.tid}>
-                    {i.technologyName}
+                  <div className={styles.Badges} key={i}>
+                    {i}
                   </div>
                 ))}
               </div>
