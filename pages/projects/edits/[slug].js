@@ -68,9 +68,6 @@ function Edits() {
   }
 
   const handleProjectEdit = async() => {
- 
-    
-    
       try {
         setMergeArr( data["taskInfoList"].concat(newTaskArr) );
         console.log(mergeArr);
@@ -97,10 +94,7 @@ function Edits() {
       toast.error("Invalid Details");
       console.log(error);
       }
-    
-     
   }
-
   if (pno !== undefined && data) 
   {
     return (
@@ -113,7 +107,7 @@ function Edits() {
                 Added on {data["project"]["dateAdded"]}
               </div>
               <div className={styles.projectBadges}>
-                {data["project"]["technologies"].map((i) => (
+                {data["project"]["technologies"].split(',').map((i) => (
                   <div className={styles.Badges} key={i}>
                     {i}
                   </div>

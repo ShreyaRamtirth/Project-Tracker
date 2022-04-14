@@ -10,15 +10,12 @@ import { useRouter } from "next/router";
 import axios from 'axios';
 import cookieCutter from "cookie-cutter";
 
-
-
 const currentDate = new Date().toISOString().slice(0, 10);
-
-
 
 function Employee() {
   const [userErr, setUserError] = useState(true);
   const [passErr, setPassError] = useState(true);
+  const [rePassErr, setRePassError] = useState(true);
   const [fnameErr, setFnameError] = useState(true);
   const [lnameErr, setLnameError] = useState(true);
   const [phnoErr, setPhnoError] = useState(true);
@@ -102,6 +99,11 @@ function Employee() {
     if (validPassword.test(e.target.value)) setPassError(true);
     else setPassError(false);
   };
+  const rePassValidation = (e) => {
+   // setRePassError(e.target.value);
+    if (password === e.target.value) setRePassError(true);
+    else setRePassError(false);
+  };
   const currentDate = new Date()
   
   
@@ -139,92 +141,142 @@ function Employee() {
     <ToastContainer />
       <div className={styles.projectBase}>
         <div className={styles.projectHeading}>Employee Info <hr /></div> 
-      <div className={styles.projectTitle}>
-            <label>Enter First Name </label> <input type="text" className={styles.projectInput}  
-            data-tip="Should contain only charaters" onChange={fnameValidation} />
-            {fnameErr ? "" : <p className={styles.error}>Invalid First Name</p>}    
-            {mount && <ReactTooltip place="right" type="info" effect="float" 
-                multiline={true} 
-                /> }
-            <label>Enter Last Name </label> <input type="text" className={styles.projectInput} 
-             data-tip="Should contain only charaters"
+        <div className={styles.projectTitle}>
+        <table >
+          <tbody>
+            
+  
+      <tr>
+        <td>
+            <label>Enter First Name </label> 
+            </td>
+            <td>
+            <input type="text" className={styles.projectInput}  size="42"
+             
+             data-tip="Should contain only charaters" onChange={fnameValidation} /> 
+             {fnameErr ? "" : <p className={styles.error}>Invalid First Name</p>}    
+             {mount && <ReactTooltip place="right" type="info" effect="float" 
+                 multiline={true} 
+                 /> }
+            </td>
+            </tr>
+            
+            <tr> <td>
+           Enter Last Name 
+            </td>
+            <td>
+            <input type="text" className={styles.projectInput} 
+             data-tip="Should contain only charaters" size="42"
             onChange={lnameValidation} />
             {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
                 /> }
-            {lnameErr ? "" : <p className={styles.error}>Invalid Last Name</p>}    
-        </div>
+                 {lnameErr ? "" : <p className={styles.error}>Invalid Last Name</p>} 
+                </td>
+                </tr>
+              
+        {/* </div> */}
         
-        <div className={styles.projectTitle}>
-        <label>Enter username </label> <input type="text" className={styles.projectInput} 
+
+        {/* <div className={styles.projectTitle}> */}
+          <tr> <td>
+        <label>Enter username </label> </td> 
+        <td>
+        <input type="text" className={styles.projectInput} size="42"
         data-tip="Should not contain space and special characters"
         onChange={UserValidation} />
         {userErr ? "" : <p className={styles.error}>Invalid Username</p>}  
         {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
                 /> }  
-            <label>Enter Password </label> <input type="passsword" className={styles.projectInput} 
+                </td> </tr>
+      <tr> <td>
+            <label>Enter Password </label> </td> 
+            <td>
+            <input type="password" className={styles.projectInput} 
             data-tip="Should contain Uppercase, <br>
             Lowercase, digit, special character,  <br>
              8 character long"
-            onChange={PassValidation} />          
+            onChange={PassValidation}  size="42"/>          
             {passErr ? "" : <p className={styles.error}>Invalid Password</p>}   
             {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
-                /> } 
-        </div>
+                /> } </td>
+                </tr>
+                <tr> <td>
+            <label>Re Enter Password </label> </td> 
+            <td>
+            <input type="password" className={styles.projectInput} 
+            data-tip="Should match with previous field"
+            onChange={rePassValidation}  size="42"/>          
+            {rePassErr ? "" : <p className={styles.error}>Password Not Mathing</p>}   
+            {mount && <ReactTooltip place="right" type="info" effect="float" 
+                multiline={true} 
+                /> } </td>
+                </tr> 
+        {/* </div> */}
 
-        <div className={styles.projectTitle}>
-          <label>Enter Date of Birth </label> <input type="date" className={styles.projectInput}
+
+
+          <tr>
+            <td>
+          <label>Enter Date of Birth </label> </td> <td> <input type="date" size="50"  className={styles.projectInput}
           data-tip="User should be 18 years old"
           onChange={dobValidation} />
           {dobErr ? "" : <p className={styles.error}>Invalid DOB</p>}    
           {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
                 /> }
-          <label>Enter Email </label> <input type="email" className={styles.projectInputEmail} 
+                </td></tr>
+                <tr> <td>
+          <label>Enter Email </label> </td> <td> <input size="42" type="email" className={styles.projectInput} 
           data-tip="example@any.com"
           onChange={EmailValidation} />
+          
           {emailErr ? "" : <p className={styles.error}>Invalid Email</p>}    
           
           {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
-                /> }
-        </div>
-
-        <div className={styles.projectTitle}>
-          
-        </div>
-           
-
-              <div className={styles.projectTitle}>
-
-        <label>Enter Phone Number </label> <input type="text" className={styles.projectInput} 
+                /> } </td></tr>
+    
+        <tr><td>
+        <label>Enter Phone Number </label> </td> <td> <input type="text"  size="42" className={styles.projectInput} 
          data-tip="Should be 10 digit"
         onChange={PhnoValidation} />
         {phnoErr ? "" : <p className={styles.error}>Invalid Phone Number</p>}  
         {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
                 /> }
-        <label>Enter role </label> <input type="radio"  name='role' value="Employee" className={styles.projectInput}  onChange={(e)=> setRole(e.target.value)} /> Employee
-            <input type="radio" value="Project Manager" name='role' className={styles.projectInput}  onChange={(e)=> setRole(e.target.value)} />  Project Manager
-        </div>
+</td>
+</tr>
+<tr>
+<td>
+        <label>Enter role </label>  </td> <td> <div className={styles.projectRole}> <input type="radio"  name='role' value="Employee" className={styles.projectInput}  onChange={(e)=> setRole(e.target.value)} /> <label>  Employee </label> 
+         <input type="radio" value="Project Manager" name='role' className={styles.projectInput}  onChange={(e)=> setRole(e.target.value)} /> <label>Project Manager</label></div></td>
         
-        <div className={styles.projectTitle}>
-        <label>Enter Address </label> 
-        <textarea type="passsword" cols={70} rows={5} className={styles.projectInput} 
+        
+        </tr>
+       
+          <tr> <td >
+          
+        <label >Enter Address </label></td>
+        <td>
+        <textarea  cols={70} rows={5} className={styles.projectInput} 
         data-tip="Should contain characters and numbers only"
         onChange={AddressValidation} />          
         {addressErr ? "" : <p className={styles.error}>Invalid Address</p>}  
         {mount && <ReactTooltip place="right" type="info" effect="float" 
                 multiline={true} 
                 /> }
+                </td></tr>
+
+</tbody>
+</table>
 </div>
-
-
         <div className={styles.projectSubmit}>
                 <input type="button" className={styles.projectButton} value="SUBMIT" onClick={handleSubmit} />
               </div>
+              
     </div>
     </div>
     </div>

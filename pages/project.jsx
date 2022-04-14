@@ -137,7 +137,7 @@ function project() {
                 </Link>
               </div>
               <div className={styles.projectBadges}>
-                {n.technologies.map((i) => (
+                {n.technologies.split(",").map((i) => (
                   <div className={styles.Badges} key={i}>
                     {i}
                   </div>

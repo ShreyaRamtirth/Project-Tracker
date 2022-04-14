@@ -59,7 +59,7 @@ const Post = () => {
             </div>
             <div className={styles.projectBadges}>
               
-                  {data["project"]["technologies"].map((i) => (
+                  {data["project"]["technologies"].split(',').map((i) => (
                     <div className={styles.Badges} key={i}>
                       {i}
                     </div>
@@ -76,13 +76,14 @@ const Post = () => {
                 
                  <div className={styles.tasksContainer} >
                 
+  { data["taskInfoList"] === null ? " " : 
                  <table className={styles.tasks}>
                  <tr className={styles.taskRow}>
     <th className={styles.taskRow}>Task</th>
     <th className={styles.taskRow}>Intern</th>
     <th className={styles.taskRow}>Status</th>
   </tr>
-                 {data["taskInfoList"].map((i) => (
+                { data["taskInfoList"].map((i) => (
                    <tr className={styles.taskRow} ><td className={styles.taskRow}> 
                     <div className={styles.task} key={i.taskId}>
                       {i.task}
@@ -99,11 +100,9 @@ const Post = () => {
                     </td>
                     
                     </tr>
-                  ))}
-                  </table>
+                  ))} 
+                  </table> }
                   </div>
-               
-                 
           </div>
         </div>
       </div>

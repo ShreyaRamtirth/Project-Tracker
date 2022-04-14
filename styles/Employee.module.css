@@ -24,9 +24,9 @@
 }
 .projectTitle{
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-items: center;
-    align-items: center;
+    align-items: center; */
     padding: 10px;
     margin: 10px;
     font-size: 17px;
@@ -57,6 +57,11 @@
     transition: all 0.5s ease;
 }
 
+.projectRole{
+     display: flex;
+    justify-items: center;
+    align-items: center;
+}
 .projectButton:hover{
     background-color: var(--sidebar-background-color);
     color: aliceblue;

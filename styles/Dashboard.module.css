@@ -1,0 +1,90 @@
+.projectContainer{
+    padding: 10px;
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, 0.589);
+    background-color: rgba(231, 226, 226, 0.589);
+    background-size: cover;
+    
+    
+}
+.projectBase{
+    margin:0 20px 30px 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 15px 20px rgba(78, 75, 75, 0.425);
+    background-color: aliceblue;
+    
+}
+.dashboardCount{
+    display: flex;
+    justify-content: space-around;
+}
+.countup{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+    /* padding-bottom: 20px; */
+}
+.countupWrap{
+    margin: 10px;
+    padding: 0px 50px;
+    background: rgba(253, 251, 251, 0.884);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    box-shadow: 1px 5px 12px rgba(46, 45, 45, 0.61);
+}
+.title{
+    font-size: 15px;
+    color: rgb(48, 44, 44);
+}
+.graph{
+    display: flex;
+    justify-content: space-around;
+   
+}
+.showDeadline{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 20px;
+     background: rgba(253, 251, 251, 0.884);
+    border-radius: 10px;
+    font-size: 15px;
+    color: rgb(48, 44, 44);
+    box-shadow: 1px 5px 12px rgba(46, 45, 45, 0.61);
+    margin-top: 40px;
+}
+.showProject{
+    padding: 10px;
+    background: rgba(173, 170, 170, 0.315);
+    margin: 10px;
+    margin-top: 20px;
+    font-size: 17px;
+}
+.feed{
+    display: flex;
+    justify-content: space-around;
+    background-color: aquamarine;
+}
+.tableDetails{
+    width: 100%;
+    border: 1px solid #ddd;
+  text-align: left;
+    border-collapse: collapse;
+}
+.tableRow{
+    padding: 10px;
+    margin: 10px;
+}
+.weather{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    /* width: 100%; */
+    background-color: aquamarine;
+}
+.iframe{
+    margin: 10px;
+    border-radius: 10px;
+    
+}

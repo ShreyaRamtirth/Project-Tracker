@@ -10,6 +10,8 @@ const GETPROJECTDETAILS = "http://localhost:8080/getproject/";
 const UpdateProject = "http://localhost:8080/project/update";
 const CreateProject = "http://localhost:8080/project/add";
 const CreateEmployee = "http://localhost:8080/user/add";
+const CreateClient = "http://localhost:8080/client/add";
+const GetClient = "http://localhost:8080/client/names";
 export {
     LOGIN_URL,
     VALIDATE_URL,
@@ -22,5 +24,7 @@ export {
     GETPROJECTDETAILS,
     UpdateProject,
     CreateProject,
-    CreateEmployee
+    CreateEmployee,
+    CreateClient,
+    GetClient
 }

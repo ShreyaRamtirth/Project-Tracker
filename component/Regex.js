@@ -17,7 +17,7 @@ export const ValidPhno = new RegExp(
   "^[0-9()-]{10}$"
 );
 export const ValidAddress = new RegExp(
-  "^[a-zA-Z0-9,'-]*$"
+  "^[a-zA-Z0-9_ .-]{1,50}$"
 );
 
 export const ValidEmailAddress = new RegExp(
