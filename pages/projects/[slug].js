@@ -13,10 +13,11 @@ const Post = () => {
   const [pno, setPno] = useState(undefined);
   const [tech, setTech] = useState(undefined);
   const [task, setTask] = useState(undefined);
+  const [getrole, setGetRole] = useState("");
   useEffect(() => {
     setPno(pname.slug);
     if(!router.isReady) return;
-   
+    setGetRole(cookieCutter.get("role"));
   if(pname.slug !== undefined ){
      axios(GETPROJECTDETAILS +pname.slug, {
         method: "GET",
@@ -45,11 +46,13 @@ const Post = () => {
    {/* { setTech(data["project"]["technologies"])}      */}
         <div className={styles.projectMaxContainer}>
           <div className={styles.projectBase}>
+            { getrole === "Employee" ? " " :
             <div className={styles.projectEdit}>
               <Link href={"/projects/edits/" + pname.slug}><a>
                 <FaPencilAlt className={styles.pencil} />
               </a></Link>
             </div>
+            }
             
              <div className={styles.projectTitle}>
               <h4>{data["project"]["title"]}</h4>
@@ -78,6 +81,7 @@ const Post = () => {
                 
   { data["taskInfoList"] === null ? " " : 
                  <table className={styles.tasks}>
+                   <tbody>
                  <tr className={styles.taskRow}>
     <th className={styles.taskRow}>Task</th>
     <th className={styles.taskRow}>Intern</th>
@@ -101,6 +105,7 @@ const Post = () => {
                     
                     </tr>
                   ))} 
+                  </tbody>
                   </table> }
                   </div>
           </div>

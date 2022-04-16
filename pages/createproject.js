@@ -3,7 +3,7 @@ import styles from "../styles/Createproject.module.css";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import CurrencyFormat from 'react-currency-format';
 import "@pathofdev/react-tag-input/build/index.css";
-import {GetClient} from './api/endpoints';
+import {GetClient, CreateProject} from './api/endpoints';
 import { ToastContainer, toast } from "react-toastify";
 import ReactTooltip from 'react-tooltip';
 import "react-toastify/dist/ReactToastify.css";
@@ -49,6 +49,7 @@ function createproject() {
     },[]); 
 
     const  handleSubmit =  async () => {  
+      console.log("client",client)
       try {
         const response = await axios.post(
           CreateProject,
@@ -161,12 +162,12 @@ function createproject() {
 
          <tr><td>
                 <label className={styles.deadlineLabel}>Client</label> </td> <td>
-                <select className={styles.projectInput}>
+                <select className={styles.projectInput}  onClick={(e)=> { setClient(e.target.value); console.log(e.target.value) } } >
 
                   {   clientNames.map((i)=>(
-                    <option value={i} onChange={(e)=> setClient(e.target.value) } >{i}</option>
+                    <option value={i}  >{i}</option>
                    ) ) }
-        
+    
         {/* <option value="vegetable">Vegetable</option>
         <option value="meat">Meat</option> */}
       </select>

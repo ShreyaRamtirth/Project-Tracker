@@ -1,12 +1,16 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 
 import Avatar from 'react-avatar';
 import styles from '../styles/NavBar.module.css';
-
+import cookieCutter from "cookie-cutter";
 function NavBar() {
 
   const [showMe, setShowMe] = useState(false);
-  
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    setUsername(cookieCutter.get("username"));
+    
+  }, []);
 
   function toggle(){
     setShowMe(!showMe);
@@ -15,7 +19,7 @@ function NavBar() {
 
     <div className={styles.navBarContainer}>
       <div className={styles.avtarProfile} onClick={toggle}>
-      <Avatar color={Avatar.getRandomColor( ['red' , 'cyan'])} name="Foo Bar" round={true} size="70"/>
+      <Avatar color={Avatar.getRandomColor( ['red' , 'cyan'])} name={username} round={true} size="70"/>
       </div>
      
     
@@ -30,9 +34,6 @@ function NavBar() {
           </div>
           <div className={styles.menuItem}>
             Dashboard
-          </div>
-          <div className={styles.menuItem}>
-            Setting
           </div>
           <div className={styles.menuItem}>
             Logout

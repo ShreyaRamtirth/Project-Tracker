@@ -64,6 +64,8 @@ export default function Home() {
         { headers: headers }
       );
       cookieCutter.set("jwt", response.data.jwt);
+      cookieCutter.set("username", response.data.username);
+      cookieCutter.set("role", response.data.role);
 
       router.push("/dashboard");
     } catch (error) {

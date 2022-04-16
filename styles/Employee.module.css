@@ -12,9 +12,12 @@
     background-color: aliceblue;
     display: flex;
     justify-content: center;
-    
+   
     flex-direction: column;
 }
+/* .projectMaxContainer{
+ 
+} */
 .projectHeading{
     font-size: 20px;
     
@@ -27,8 +30,8 @@
     /* display: flex;
     justify-items: center;
     align-items: center; */
-    padding: 10px;
-    margin: 10px;
+    /* " padding: 10px;" */
+    margin: 10px; 
     font-size: 17px;
     /* justify-content: space-between; */
 }
@@ -44,6 +47,15 @@
     width: 330px;
     border-radius: 10px;
 }
+
+.projectDesc{
+      
+    padding: 20px 20px 20px 0 ;
+    font-size: 17px;
+    line-height: 1.5em;
+    margin: 10px;
+    
+  }
 .projectButton{
     outline: none;
     border: none;
@@ -77,4 +89,154 @@
     font-size: 15px;
     padding: 5px;
     
+  }
+  .edit{
+     float: right;
+   
+     margin: 10px;
+  }
+
+  .menuProject{
+    padding: 10px;
+   
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+.itemMenuIcon{
+    margin: 1px 20px 0 0 ;
+    font-size: 24px;
+    
+    background-color: aliceblue;
+    box-shadow: 2px 5px 25px #000;
+}
+.searchMenu {
+    border: none;
+    
+    margin: 0;
+    padding: 7px 18px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: 20px;
+  }
+  
+  .inputAddBtn {
+  font-size: 35px;
+  background-color: transparent;
+  color: #034675;
+  width: 50px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  opacity: 0.7;
+  
+  }
+  .projectBadges{
+    display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 10px;
+  }
+ 
+  .Badges{
+    background-color: rgba(81, 255, 0, 0.575);
+      padding: 2px 10px 2px  10px;
+      font-size: 15px;
+      border-radius: 10px;
+}
+.searchSubmit{
+    font-size: 25px;
+    margin-top: 5px;
+    float: right;
+    margin-left: 10px;
+}
+.menuProjectItem{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+  .searchMenu:focus{
+    box-shadow: 0 0 3px 0 #1183d6;
+    border-color: #1183d6;
+    outline: none;
+  }
+
+  .projectPostContainer{
+      /* display: flex;
+      flex-direction: row; */
+       
+      /* width:450px; 
+      max-width:450px;
+      display: inline-grid; */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+  }
+
+  .projectBase{
+      margin:0 20px 30px 20px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 5px 15px 20px rgba(78, 75, 75, 0.685);
+      background-color: aliceblue;
+  }
+
+  .projectIcon{
+      padding: 10px;
+      background: rgba(214, 205, 205, 0.5);
+      color: #034675;
+      border-radius: 10px;
+        margin-right: 2px;
+  }
+.projectLine{
+       margin-top: 10px;
+}
+  .pagination {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+   
+  }
+  
+  .pagination li {
+    font-weight: 600;
+    color: black;
+    padding: 8px 16px;
+    background-color: rgb(209, 203, 203);
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid rgb(255, 255, 255);
+    list-style: none;
+    background: #ffffff;
+    box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
+
+  }
+  
+ .pagination .paginationbtn{
+color: #1183d6;
+font-weight: 500;
+}
+
+  .pagination .ulActive {
+    background-color: #1183d6;
+    color: white;
+    border: 1px solid #1183d6;
+  }
+  .projectDisplay{
+      display: inline;
+        
+        padding-top: 10px;
+      
+  }
+  .projectList{
+      padding: 10px;
+      font-weight: 500;
+      color: #034675;
+  }
+  .projectListTitle{
+    font-weight: 600;
   }

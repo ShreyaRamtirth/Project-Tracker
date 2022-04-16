@@ -12,6 +12,17 @@ const CreateProject = "http://localhost:8080/project/add";
 const CreateEmployee = "http://localhost:8080/user/add";
 const CreateClient = "http://localhost:8080/client/add";
 const GetClient = "http://localhost:8080/client/names";
+const GetUserTask = "http://localhost:8080/user/tasks/";
+const GetUserInfo = "http://localhost:8080/user/info/";
+const GetUserUpdate = "http://localhost:8080/user/update/";
+const GetUsers = "http://localhost:8080/users/page/";
+const TotalEmployee = "http://localhost:8080/users/count";
+const GetUsersbyName = "http://localhost:8080/users/search/";
+const GetClientCount = "http://localhost:8080/clients/count";
+const GetClientInfo = "http://localhost:8080/clients/page/";
+const GetClientByName = "http://localhost:8080/clients/search/";
+
+
 export {
     LOGIN_URL,
     VALIDATE_URL,
@@ -26,5 +37,15 @@ export {
     CreateProject,
     CreateEmployee,
     CreateClient,
-    GetClient
+    GetClient,
+    GetUserTask,
+    GetUserInfo,
+    GetUserUpdate,
+    GetUsers,
+    TotalEmployee,
+    GetUsersbyName,
+    GetClientCount,
+    GetClientInfo,
+    GetClientByName
+
 }

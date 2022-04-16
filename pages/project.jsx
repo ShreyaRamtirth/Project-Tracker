@@ -23,6 +23,11 @@ function project() {
   const [postPage, setPostPage] = useState(1);
   const [countArray, setCountArray] = useState(0);
   const router = useRouter();
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    setRole(cookieCutter.get("role"));
+    
+  }, []);
   useEffect(() => {
     setMount(true);
     setStopEffect(true);
@@ -60,8 +65,6 @@ function project() {
         console.log(error);
       });
 
-
-     
     if( filter === '' || filter === undefined ) {
     try {
       axios(GETPAGE + postPage, {
@@ -88,8 +91,6 @@ function project() {
     setFilter(e.target.value);
 
   };
- 
-  
 
   return (
     <div className={styles.projectContainer}>
@@ -98,21 +99,25 @@ function project() {
           <input
             type="search"
             className={styles.searchMenu}
+            size={42}
             placeholder="Search Project"
             onChange={(e) => searchProject(e)}
           />
 
           <FcSearch className={styles.searchSubmit} />
         </div>
+
+        {  role === "Project Manager" ? 
         <div className={styles.menuProjectItem}>
           <button className={styles.inputAddBtn} data-tip="Create" onClick={()=>router.push("/createproject")} >
-            {" "}
-            <HiFolderAdd />{" "}
+            <HiFolderAdd />
             {mount && (
               <ReactTooltip place="bottom" type="dark" effect="solid" />
-            )}{" "}
+            )}
           </button>
         </div>
+        : ""
+        }
       </div>
       <div className={styles.projectPostContainer}>
      
@@ -129,13 +134,15 @@ function project() {
                   </div>
                 </a>
               </Link>
+
+              { role === "Project Manager" ?  
               <div className={styles.projectEdit}>
                 <Link href={"projects/edits/" + n.pid}>
                   <a>
                     <FaPencilAlt className={styles.pencil} />
                   </a>
                 </Link>
-              </div>
+              </div> : "" }
               <div className={styles.projectBadges}>
                 {n.technologies.split(",").map((i) => (
                   <div className={styles.Badges} key={i}>
@@ -144,12 +151,14 @@ function project() {
                 ))}
               </div>
               <div className={styles.projectDesc}>
+                
                 <LinesEllipsis
                   text={n.description}
                   maxLine={3}
                   ellipsis="..."
                   trimRight
                   basedOn="letters"
+                  
                 />
               </div>
             </div>
