@@ -4,12 +4,13 @@ import cookieCutter from 'cookie-cutter';
 
 
 
+
 export function authenticateUser(){
-    
-    const router = useRouter();       
-      try {
-       if (  cookieCutter.get('jwt') === undefined) {  router.push("/"); return false} 
-      } catch (error) {
-          console.log(error);
-      } 
+    const router = useRouter();  
+        try {
+            if ( cookieCutter.get('jwt') === "" || cookieCutter.get('jwt') === undefined ) {  router.push("/"); return false} 
+            return true;
+           } catch (error) {
+               return false;
+           } 
 }

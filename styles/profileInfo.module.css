@@ -1,0 +1,95 @@
+.projectContainer{
+    padding: 10px;
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, 0.589);
+    background-color: rgba(226, 224, 224, 0.589);
+    background-size: cover;
+  }
+
+  .projectBase{
+    margin:0 20px 30px 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 15px 20px rgba(78, 75, 75, 0.685);
+    background-color: aliceblue;
+}
+.profileContainer{
+    display: flex;
+    flex-direction: row;
+}
+.personalInfoWrapper{
+    margin: 10px;
+}
+.personalInfo{
+    padding: 20px 90px;
+    border-bottom: 1px solid #000;
+    background: rgb(255, 255, 255);
+    box-shadow: 1px 5px 10px #000;
+    font-weight: 700;
+    font-size: 18px;
+}
+.personalInfoAvatar{
+    padding-left: 35%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 5px 10px #000;
+}
+.informationContainer{
+    background: #fff;
+    box-shadow: 1px 5px 10px #000;
+}
+.information{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.informationLabel{
+    font-weight: 600;
+    color: rgb(28, 28, 143);
+    padding: 10px;
+    
+}
+.informationLabel1{
+    font-weight: 600;
+    color: rgb(28, 28, 143);
+    padding: 10px;
+}
+.aboutContainer{
+    margin: 10px;
+    /* background-color: #fff; */
+}
+.aboutMe{
+    background: rgb(255, 255, 255);
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.452);
+    padding: 20px 290px;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 1px solid #000;
+}
+.techContainer{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 5px 10px #000;
+}
+.tech{
+    padding: 10px;
+    font-weight: 600;
+    font-size: 17px;
+    
+}
+.projects{
+    padding: 10px;
+}
+.phone{
+    font-size: 28px;
+    transform: rotate(-80deg);
+}
+.qualification{
+    font-size: 28px;
+}
+.techs{
+    padding: 10px;
+    color: rgb(5, 5, 94);
+    font-weight: 500;
+}

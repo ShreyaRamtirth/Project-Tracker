@@ -71,6 +71,16 @@ const Post = () => {
                 <div className={styles.projectDesc}>
                   <p>{data["project"]["description"]}</p>
                 </div>
+
+                    <div className={styles.projectPhaseContainer} >
+                <div className={styles.projectPhase}>
+                  <p> Current Phase : {data["phaseName"]}</p>
+                </div>
+
+                <div className={styles.projectPhase}>
+                  <p> Expected to be Completed : {data["expectedPhaseCompletionDate"]}</p>
+                </div>
+                </div>
                 <hr />
               
                  <div className={styles.deadline} >

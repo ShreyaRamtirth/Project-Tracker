@@ -184,7 +184,8 @@
 
   .projectIcon{
       padding: 10px;
-      background: rgba(214, 205, 205, 0.5);
+      /* background: rgba(214, 205, 205, 0.5); */
+      font-size: 18px;
       color: #034675;
       border-radius: 10px;
         margin-right: 2px;
@@ -226,12 +227,7 @@ font-weight: 500;
     color: white;
     border: 1px solid #1183d6;
   }
-  .projectDisplay{
-      display: inline;
-        
-        padding-top: 10px;
-      
-  }
+  
   .projectList{
       padding: 10px;
       font-weight: 500;

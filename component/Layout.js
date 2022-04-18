@@ -14,8 +14,9 @@ const Layout=( {children} )=>{
     }    
     else{
       
-        if(authenticateUser)
+        if(authenticateUser())
         {
+            console.log("true");
         return(
 
             <div className={styles.bodyContainer} >
@@ -29,7 +30,10 @@ const Layout=( {children} )=>{
                  {children}</div>
             </div>
         )}else
-        return (<div></div>)
+        {
+            console.log("false");
+            return (<div></div>)
+        }
     }
 }
 export default Layout;

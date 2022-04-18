@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-
+import Link from "next/link";
 import Avatar from 'react-avatar';
 import styles from '../styles/NavBar.module.css';
 import cookieCutter from "cookie-cutter";
@@ -29,14 +29,26 @@ function NavBar() {
       
         <div className={styles.arrowUp}></div>
         <div className={styles.MenuContainer}>
-          <div className={styles.menuItem} onClick={()=>handleMenuAvatar('\profile')} >
-            Profile
+          <div className={styles.menuItem} >
+            <Link href="/profileinfo">
+                <a>Profile</a>
+              </Link>
           </div>
           <div className={styles.menuItem}>
-            Dashboard
+            <Link href="/dashboard">
+                <a>Dashboard</a>
+              </Link>
           </div>
           <div className={styles.menuItem}>
-            Logout
+          <Link href="/">
+                <a onClick={()=>{
+                  cookieCutter.set("jwt","");
+                  cookieCutter.set("role","");
+                  cookieCutter.set("username","");
+                 console.log( "done" ); 
+              }} >Logout</a>
+              </Link>
+            
           </div>
         </div>
       </div>

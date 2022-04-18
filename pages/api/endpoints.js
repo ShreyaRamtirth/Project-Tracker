@@ -21,8 +21,11 @@ const GetUsersbyName = "http://localhost:8080/users/search/";
 const GetClientCount = "http://localhost:8080/clients/count";
 const GetClientInfo = "http://localhost:8080/clients/page/";
 const GetClientByName = "http://localhost:8080/clients/search/";
-
-
+const CountProjectEmp = "http://localhost:8080/user/count/projects/";
+const PriorityProjects = "http://localhost:8080/projects/priority";
+const CountProjectsCompletion = "http://localhost:8080/projects/all/count";
+const CostProjects = "http://localhost:8080/projects/all/cost";
+const ProgressProjects = "http://localhost:8080/projects/all/progress";
 export {
     LOGIN_URL,
     VALIDATE_URL,
@@ -46,6 +49,10 @@ export {
     GetUsersbyName,
     GetClientCount,
     GetClientInfo,
-    GetClientByName
-
+    GetClientByName,
+    CountProjectEmp,
+    PriorityProjects,
+    CountProjectsCompletion,
+    CostProjects,
+    ProgressProjects
 }

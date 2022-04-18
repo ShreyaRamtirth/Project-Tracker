@@ -334,7 +334,7 @@ function Employee() {
          <div className={styles.projectMaxContainer} key={n.uid}>
            <div className={styles.projectBase}>
                  <div className={styles.projectTitle}>
-                   <h4>{n.firstName + " " + n.lastName}</h4>
+                   <h3>{n.firstName + " " + n.lastName}</h3>
                  </div>
 
                  <div className={styles.projectTitle}>
@@ -495,7 +495,7 @@ function Employee() {
                       size="42"
                       value={ userInfo["username"] }
                       disabled={disabledValue}
-                      data-tip="Should not contain space and special characters"
+                      data-tip="You do not have permission <br> to edit this"
                       onChange={UserValidation}
                     />
                     {userErr ? (
@@ -630,8 +630,22 @@ function Employee() {
                   </td>
                   <td>
                     <div className={styles.projectRole}>
-                      <label> { userInfo["roles"] } </label>
-                    
+                      <input
+                      type="text"
+                      size="42"
+                      className={styles.projectInput}
+                      data-tip="You do not have permission <br> to edit this"
+                      value={ userInfo["roles"] }
+                      disabled={disabledValue}
+                    />
+                     {mount && (
+                      <ReactTooltip
+                        place="right"
+                        type="info"
+                        effect="float"
+                        multiline={true}
+                      />
+                    )}
                     </div>
                   </td>
                 </tr>
@@ -705,7 +719,7 @@ function Employee() {
           </div>
            }
 <hr />
-<div className={styles.projectListTitle} >Work on - </div>
+<div className={styles.projectListTitle} >Worked on - </div>
              {   userInfo["projects"] === undefined ? <div>None</div> :
               userInfo["projects"].map((i)=>(
            <div  className={styles.projectList}> <BsFillCaretRightFill  /> {i.title}</div>

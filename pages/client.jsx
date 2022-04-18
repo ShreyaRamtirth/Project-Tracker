@@ -158,7 +158,7 @@ function Client() {
          <div className={styles.projectMaxContainer} key={n.uid}>
            <div className={styles.projectBase}>
                  <div className={styles.projectTitle}>
-                   <h4>{n.clientName}</h4>
+                   <h3>{n.clientName}</h3>
                  </div>
 
                  <div className={styles.projectTitle}>

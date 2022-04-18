@@ -23,7 +23,7 @@ function Edits() {
   const [phase, setPhase] = useState();
   const [description, setDescription] = useState();
   const [completed, setCompleted] = useState("Not Completed");
-  const [lengthArray, setLengthArray] = useState(null);
+  const [change, setChange] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const currentDate = new Date().toISOString().slice(0, 10);
   useEffect(() => {
@@ -49,8 +49,10 @@ function Edits() {
     }
   }, [router.isReady]);
 
+ 
+ 
   const handleAdd = () => {
-
+    setChange(true)
     if (newTaskArr.length === 0) {
       setNewTaskArr([
         {
@@ -58,10 +60,11 @@ function Edits() {
           username: "",
           assigned_on: currentDate,
           completed: false,
-          completed_on: new Date()
+          completed_on: ""
         },
       ]);
     } else {
+
       setNewTaskArr([
         ...newTaskArr,
         {
@@ -69,20 +72,27 @@ function Edits() {
           username: "",
           assigned_on: currentDate,
           completed: false,
-          completed_on: new Date()
+          completed_on: ""
         },
       ]);
-     
     }
-    setMergeArr(data["taskInfoList"].concat(newTaskArr));
-    console.log("newtask",newTaskArr);
-    console.log("lengthArray",lengthArray);
+    if(data["taskInfoList"] === null ){
+      setMergeArr(newTaskArr);
+    }else
+      setMergeArr(data["taskInfoList"].concat(newTaskArr));
+    // console.log("newtask",mergeArr);
+    // console.log("lengthArray",newTaskArr);
   };
 
   const handleProjectEdit = async () => {
     try {
+
+      // setMergeArr(data["taskInfoList"].concat(newTaskArr));
+       if(data["taskInfoList"] === null ){
+      setMergeArr(newTaskArr);
+    }else
       setMergeArr(data["taskInfoList"].concat(newTaskArr));
-      
+  
       console.log("mergeArr", mergeArr);
       if( mergeArr.length === 0) {
         setSelectedStatus(true);   
@@ -102,7 +112,10 @@ function Edits() {
             Authorization: "Bearer " + cookieCutter.get("jwt"),
           },
         }
-      );
+      ); console.log(response.data);
+      response.data
+      ? toast.success("Information Added Succesfully.")
+      : toast.error("not valid.");
     } catch (error) {
       console.log(mergeArr);
       toast.error("Invalid Details");
@@ -141,6 +154,7 @@ function Edits() {
               <div className={styles.deadline}>
                 Phase 
                 <select
+                  defaultValue={data["phaseName"]}
                   className={styles.deadlinePicker}
                   onClick={(e) => {
                     setPhase(e.target.value);
@@ -198,7 +212,9 @@ function Edits() {
                         <th className={styles.taskRow}>Status</th>
                         <th className={styles.taskRow}>Assigned Date</th>
                       </tr>
-                      {data["taskInfoList"].map((i) => (
+                      { data["taskInfoList"] === null ? " " : 
+
+                      data["taskInfoList"].map((i) => (
                         <tr className={styles.taskRow} key={i.taskId}>
                           <td className={styles.taskRow}>
                             <div className={styles.task}>{i.task}</div>
@@ -222,7 +238,7 @@ function Edits() {
                           </td>
                           <td className={styles.taskRow}> {i.assigned_on} </td>
                         </tr>
-                      ))}
+                      ))} 
                       {newTaskArr.map((i) => (
                         <tr key={i.task} className={styles.taskRow}>
                           <td className={styles.taskRow}>
