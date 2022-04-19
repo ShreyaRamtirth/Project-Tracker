@@ -115,7 +115,7 @@ function Edits() {
       ); console.log(response.data);
       response.data
       ? toast.success("Information Added Succesfully.")
-      : toast.error("not valid.");
+      : ""
     } catch (error) {
       console.log(mergeArr);
       toast.error("Invalid Details");
