@@ -6,7 +6,7 @@ import {
   ValidAddress,
   ValidPhno,
   ValidUsername,
-  validLname,
+  ValidClientName,
   ValidEmailAddress,
   validPassword,
 } from "../component/Regex";
@@ -73,7 +73,7 @@ function CreateNewClient() {
 
   const fnameValidation = (e) => {
     setFname(e.target.value);
-    if (validFname.test(e.target.value)) setFnameError(true);
+    if (ValidClientName.test(e.target.value)) setFnameError(true);
     else setFnameError(false);
 
     console.log(fname);
@@ -81,7 +81,7 @@ function CreateNewClient() {
   };
   const lnameValidation = (e) => {
     setLname(e.target.value);
-    if (validLname.test(e.target.value)) setLnameError(true);
+    if (ValidClientName.test(e.target.value)) setLnameError(true);
     else setLnameError(false);
   };
   const currentDate = new Date();

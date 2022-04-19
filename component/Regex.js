@@ -20,7 +20,10 @@ export const ValidAddress = new RegExp(
   // "^[a-zA-Z0-9_ .-]{1,50}$"
   
 );
-
+export const ValidClientName = new RegExp(
+  "^[a-zA-Z ]{2,30}$"
+  
+);
 export const ValidEmailAddress = new RegExp(
   "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
 );
